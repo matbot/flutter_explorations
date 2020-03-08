@@ -15,24 +15,27 @@ class HttpRequestScreen extends StatefulWidget {
 }
 
 class _HttpRequestScreenState extends State<HttpRequestScreen> {
-
-  Character character;
-
-  void initState() {
-    super.initState();
-    getCharacterData();
-  }
-
-  void getCharacterData() async {
-    final http.Response apiResponse = await http.get(HttpRequestScreen.URL);
-    character = Character.fromJSON(jsonDecode(apiResponse.body));
-    print(character);
-    setState(() {});
-  }
+  // Define a Future to be used in the FutureBuilder as snapshot.
+  Future<http.Response> apiResponse = http.get(HttpRequestScreen.URL);
 
   @override
   Widget build(BuildContext context) {
     // Use a future builder!
-    return Center(child: CircularProgressIndicator());
+    return FutureBuilder(
+      future: apiResponse,
+      builder: (context, snapshot) {
+        Widget child;
+        // TODO: add error handling http response/future snapshot.
+        if (snapshot.hasData) {
+          Character character = Character.fromJSON(jsonDecode(snapshot.data.body));
+          child = Text(
+              '${character.name}\n${character.gender}\n${character.height}',
+              style: Theme.of(context).textTheme.headline5);
+        } else {
+          child = CircularProgressIndicator();
+        }
+        return Center(child: child);
+      },
+    );
   }
 }

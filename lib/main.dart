@@ -16,25 +16,27 @@ class Explor extends StatelessWidget {
       ),
       home: DefaultTabController(
         length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Explorationer'),
-            centerTitle: true,
-            bottom: TabBar(
-              tabs: <Widget>[
-                Tab(icon: Icon(Icons.location_on)),
-                Tab(icon: Icon(Icons.photo_camera)),
-                Tab(icon: Icon(Icons.network_check)),
-              ],
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text('Explorationer'),
+              centerTitle: true,
+              bottom: TabBar(
+                tabs: <Widget>[
+                  Tab(icon: Icon(Icons.location_on)),
+                  Tab(icon: Icon(Icons.photo_camera)),
+                  Tab(icon: Icon(Icons.network_check)),
+                ],
+              ),
             ),
+              body: TabBarView(
+                children: <Widget>[
+                  ShareLocationScreen(),
+                  CameraAccessScreen(),
+                  HttpRequestScreen(),
+                ],
+              ),
           ),
-            body: TabBarView(
-              children: <Widget>[
-                ShareLocationScreen(),
-                CameraAccessScreen(),
-                HttpRequestScreen(),
-              ],
-            ),
         ),
       ),
     );
