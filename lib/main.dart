@@ -1,7 +1,8 @@
+import 'package:explorations/firestore_fun/firestorer.dart';
 import 'package:explorations/network_communication/screens/http_requests.dart';
 import 'package:flutter/material.dart';
-import 'file:///F:/GDrive/FlutterProjects/explorations/lib/camera_image_access/camera_access.dart';
-import 'file:///F:/GDrive/FlutterProjects/explorations/lib/location_services/share_location.dart';
+import 'package:explorations/camera_image_access/camera_access.dart';
+import 'package:explorations/location_services/share_location.dart';
 
 void main() => runApp(Explor());
 
@@ -15,7 +16,7 @@ class Explor extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
@@ -26,6 +27,7 @@ class Explor extends StatelessWidget {
                   Tab(icon: Icon(Icons.location_on)),
                   Tab(icon: Icon(Icons.photo_camera)),
                   Tab(icon: Icon(Icons.network_check)),
+                  Tab(icon: Icon(Icons.storage)),
                 ],
               ),
             ),
@@ -34,6 +36,7 @@ class Explor extends StatelessWidget {
                   ShareLocationScreen(),
                   CameraAccessScreen(),
                   HttpRequestScreen(),
+                  FireStorerScreen(),
                 ],
               ),
           ),
